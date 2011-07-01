@@ -85,7 +85,7 @@ class Contact
                      related_by(new_relation_ids)
 
       @reactivated.each{ |t| t.update_attribute :intended, true }
-       
+
       @new = (new_relation_ids - @reactivated.map(&:relation_id)).map do |i|
         sender.sent_ties.create! :receiver_id => receiver.id,
                                  :relation_id => i
@@ -115,7 +115,7 @@ class Contact
   # Send a message to the contact receiver
   def send_message
     if message.present?
-      sender.send_message(receiver, message, I18n.t("activity.verb.#{ contact_verb }.#{ receiver.subject_type }.message", :name => sender.name))
+      sender.send_message(receiver, message, I18n.t("activity.verb.#{ verb }.#{ receiver.subject_type }.message", :name => sender.name))
     end
   end
 end
